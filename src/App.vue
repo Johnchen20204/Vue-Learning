@@ -1,15 +1,37 @@
+<template>
+  <div>
+    <button @click="toggleActive">Toggle Active State</button>
+    <div :class="classObject">
+      This div will change classes based on the active state.
+    </div>
+  </div>
+</template>
+
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
-const count = ref(0)
+const isActive = ref(false)
 
-function increment() {
-  count.value++
+const classObject = computed(() => ({
+  'active-class': isActive.value,
+  'inactive-class': !isActive.value
+}))
+
+const toggleActive = () => {
+  isActive.value = !isActive.value
 }
 </script>
 
-<template>
-  <button @click="increment">
-    {{ count }}
-  </button>
-</template>
+<style>
+.active-class {
+  background-color: green;
+  color: white;
+}
+
+.inactive-class {
+  background-color: gray;
+  color: black;
+}
+</style>
+
+
